@@ -1,0 +1,2 @@
+# Java Programming and Software Engineering Fundamentals
+- The foundational skills a software engineer needs to solve real-world problems, from designing algorithms to testing and debugging your programs.
