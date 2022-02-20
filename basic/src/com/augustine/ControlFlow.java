@@ -21,5 +21,18 @@ public class ControlFlow {
         String msg2 = num > 9 ? "Number is greater than 9"
                 : (num > 5 ? "Number is greater than 5" : "Number is less than equal to 5");
         System.out.println(msg2);
+
+        // Switch
+        int day = 4;
+        switch (day) {
+            case 6:
+                System.out.println("Today is Saturday");
+                break;
+            case 7:
+                System.out.println("Today is Sunday");
+                break;
+            default:
+                System.out.println("Looking forward to the Weekend");
+        }
     }
 }
