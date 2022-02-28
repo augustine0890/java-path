@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LinkedListExamples {
     public static void main(String[] args) {
+        // LinkedList provides better performance than ArrayList for inserting and deleting elements.
         LinkedList<String> shoppingList = new LinkedList<>();
         shoppingList.add("apple");
         shoppingList.add("banana");

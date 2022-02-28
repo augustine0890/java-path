@@ -5,6 +5,7 @@ import java.util.Deque;
 
 public class StackExamples {
     public static void main(String[] args) {
+        // Stack class is thread safe, whereas the Deque interface is not.
         Deque<String> stack = new ArrayDeque<>();
         stack.push("First request");
         stack.push("Second request");
