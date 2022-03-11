@@ -1,6 +1,8 @@
 # Object Oriented Programming
 - Type of computer programming based on the premise that all programs are essentially computer-based simulations of real-world or abstract concepts.
+- A class is code that defines the behavior of a Java programming element called an object.
 ## Objects
+- Both in the real world and in the world of programming: are entities that have certain basic characteristics (identity, type, state, and behavior).
 - Every occurrence of a particular type of object -- called an _instance_. Every object in an object-oriented program has an _identity_.
 - Have type, state, behavior.
 ## Life Cycle of an Object
