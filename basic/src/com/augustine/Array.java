@@ -8,6 +8,12 @@ public class Array {
         int[] numbers = {5, 3, 1, 4, 2};
         Arrays.sort(numbers);
         for (int i=0; i<=numbers.length-1; i++) {
+            if (numbers[i] == 5) {
+                break;
+            }
+            if (numbers[i] % 2 == 1) {
+                continue;
+            }
             System.out.println(numbers[i]);
         }
 
