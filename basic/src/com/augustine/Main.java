@@ -23,5 +23,27 @@ public class Main {
         m = n;
         n = temp;
         System.out.println("After swap: numOne = " + m + " numTwo = " + n);
+
+        Integer[] numbers = {1, 23, 43, 55, 23};
+        System.out.println(sum(numbers));
+
+        String[] strings = {"Daily", "Coding", "Problem"};
+        System.out.println(sum(strings));
+    }
+
+    public static Integer sum(Integer[] arr) {
+        Integer sum = 0;
+        for (int k=0; k<arr.length; k++) {
+            sum += arr[k];
+        }
+        return sum;
+    }
+
+    public static String sum(String[] arr) {
+        String sum = "";
+        for (int k=0; k<arr.length; k++) {
+            sum += arr[k];
+        }
+        return sum;
     }
 }
