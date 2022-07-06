@@ -1,11 +1,12 @@
 public class LinkedList<T extends Comparable<T>> implements List<T> {
 
+    // This is the head node or root node
     private Node<T> root;
-    private int sizeCounter;
+    private int numOfItems;
 
     @Override
     public void insert(T data) {
-        ++this.sizeCounter;
+        ++this.numOfItems;
 
         if (root == null) {
             root = new Node<>(data);
@@ -21,7 +22,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             return;
         }
 
-        --this.sizeCounter;
+        --this.numOfItems;
 
         if (this.root.getData().compareTo(data) == 0) {
             this.root = this.root.getNextNode();
@@ -43,6 +44,19 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             System.out.print(node + " ");
             node = node.getNextNode();
         }
+        System.out.println();
+    }
+
+    public Node<T> getMiddle() {
+        Node<T> slow = this.root;
+        Node<T> fast = this.root;
+
+        while (fast.getNextNode() != null && fast.getNextNode().getNextNode() != null) {
+            slow = slow.getNextNode();
+            fast = fast.getNextNode().getNextNode();
+        }
+
+        return slow;
     }
 
     // O(1) constant time complexity, update the references
@@ -66,8 +80,9 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     private void remove(T dataToRemove, Node<T> previousNode, Node<T> actualNode) {
 
+        // Find the node we want to remove
         while (actualNode != null) {
-
+            // This is the node we want to remove
             if (actualNode.getData().compareTo(dataToRemove) == 0) {
                 previousNode.setNextNode(actualNode.getNextNode());
                 actualNode = null;
@@ -81,6 +96,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public int size() {
-        return this.sizeCounter;
+        return this.numOfItems;
     }
 }
