@@ -8,3 +8,7 @@
 - Dynamic data structures: can acquire memory at run-time by inserting new nodes.
 - Insert items at the beginning of the data structure fast: O(1) running time.
 - Insert items at the end: O(n).
+
+## Stacks
+- LIFO structure: the last item we inserted is the first item we take out.
+- Basic operations are: pop(), push(), and peek()
