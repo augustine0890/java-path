@@ -12,3 +12,8 @@
 ## Stacks
 - LIFO structure: the last item we inserted is the first item we take out.
 - Basic operations are: pop(), push(), and peek()
+
+## Binary Search Tree
+- In-order traversal -> lefSide + root + rightSide 
+- Pre-order traversal -> root + leftSide + rightSide
+- Post-order traversal -> leftSide + rightSide + root
