@@ -17,3 +17,13 @@
 - In-order traversal -> lefSide + root + rightSide 
 - Pre-order traversal -> root + leftSide + rightSide
 - Post-order traversal -> leftSide + rightSide + root
+
+## Hash Tables
+- The h(x) hash-function maps keys to array indexes in the array to be able to use random indexing and achieve O(1) running time.
+- The h(x) hash-function defines the relationships between the keys and the array indexes.
+- Collisions occur when the h(x) hash-function maps two keys to the same array slot (bucket)
+    - Chaining: store the items in the same bucket (with same indexes) in a linked list data structure.
+    - Open addressing: generate a new index for the item --> try to find another bucket.
+      - Linear probing: if collision happened at array index k then try index k+1, k+2, k+3,... until find an empty bucket.
+      - Quadratic probing: if collision happened at array index k then try successive values of an arbitrary quadratic polynomial (array slots 1, 4, 9, 16... steps away from the collision)
+      - Re-hashing: if collision happened at array index k the use the h(x) hash-function again to generate a new index.
