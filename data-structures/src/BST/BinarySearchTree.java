@@ -84,7 +84,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
             // This is the node with two children case
             System.out.println("Removing item with two children...");
-            Node<T> tempNode = getPredecessor(node.getRightNode());
+            Node<T> tempNode = getPredecessor(node.getLeftNode());
 
             node.setData(tempNode.getData());
             node.setLeftNode(delete(node.getLeftNode(), tempNode.getData()));
