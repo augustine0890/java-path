@@ -23,5 +23,10 @@ public class Array {
         for (String n: names) {
             System.out.println(n);
         }
+
+        int[] primes = {2, 3, 5, 7, 11, 13, 17, 19};
+        for (int p : primes) {
+            System.out.println(p);
+        }
     }
 }
