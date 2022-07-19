@@ -1,5 +1,9 @@
 package BinarySearchTree;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.Stack;
+
 public class BinarySearchTree<T extends Comparable<T>> {
 
     private int nodeCount = 0;
@@ -121,5 +125,75 @@ public class BinarySearchTree<T extends Comparable<T>> {
         if (cmp < 0) return contains(node.left, elem);
         else if (cmp > 0) return contains(node.right, elem);
         else return true;
+    }
+
+    // Computes the height of the tree, O(n)
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node) {
+        if (node == null) return 0;
+        return Math.max(height(node.right), height(node.left)) + 1;
+    }
+
+    // This method returns an iterator
+    public Iterator<T> traverse(TreeTraversalOrder order) {
+        switch (order) {
+            case PRE_ORDER:
+                return preOrderTraversal();
+            default:
+                return null;
+        }
+    }
+
+    // Returns as iterator to traverse the tree in pre-order
+    private Iterator<T> preOrderTraversal() {
+        final int expectedNodeCount = nodeCount;
+        final Stack<Node> stack = new Stack<>();
+        stack.push(root);
+
+        return new Iterator<T>() {
+            @Override
+            public boolean hasNext() {
+                if (expectedNodeCount != nodeCount) throw new ConcurrentModificationException();
+                return root != null && !stack.isEmpty();
+            }
+
+            @Override
+            public T next() {
+                if (expectedNodeCount != nodeCount) throw new ConcurrentModificationException();
+                Node node = stack.pop();
+                if (node.right != null) stack.push(node.right);
+                if (node.left != null) stack.push(node.left);
+                return node.data;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
+
+    public static void main(String[] args) {
+        BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
+        bst.add(50);
+        bst.add(30);
+        bst.add(20);
+        bst.add(40);
+        bst.add(70);
+        bst.add(60);
+        bst.add(80);
+
+        int count = bst.size();
+        Iterator preOrder = bst.traverse(TreeTraversalOrder.PRE_ORDER);
+        StringBuilder sb = new StringBuilder(count).append("[");
+        while (count > 1) {
+            sb.append(preOrder.next() + " --> ");
+            count--;
+        }
+        sb.append(preOrder.next() + "]");
+        System.out.println(sb);
     }
 }
