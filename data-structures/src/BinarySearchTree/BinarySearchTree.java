@@ -142,6 +142,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
         switch (order) {
             case PRE_ORDER:
                 return preOrderTraversal();
+            case IN_ORDER:
+                return inOrderTraversal();
             default:
                 return null;
         }
@@ -176,6 +178,47 @@ public class BinarySearchTree<T extends Comparable<T>> {
         };
     }
 
+    private Iterator<T> inOrderTraversal() {
+        final int expectedNodeCount = nodeCount;
+        final Stack<Node> stack = new Stack<>();
+        stack.push(root);
+
+        return new Iterator<T>() {
+            Node trav = root;
+            @Override
+            public boolean hasNext() {
+                if (expectedNodeCount != nodeCount) throw new ConcurrentModificationException();
+                return root != null && !stack.isEmpty();
+            }
+
+            @Override
+            public T next() {
+                if (expectedNodeCount != nodeCount) throw new ConcurrentModificationException();
+
+                // Dig left
+                while (trav != null && trav.left != null) {
+                    stack.push(trav.left);
+                    trav = trav.left;
+                }
+
+                Node node = stack.pop();
+
+                // Moving down right once
+                if (node.right != null) {
+                    stack.push(node.right);
+                    trav = node.right;
+                }
+
+                return node.data;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
+
     public static void main(String[] args) {
         BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
         bst.add(50);
@@ -187,13 +230,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
         bst.add(80);
 
         int count = bst.size();
-        Iterator preOrder = bst.traverse(TreeTraversalOrder.PRE_ORDER);
+        // Iterator preOrder = bst.traverse(TreeTraversalOrder.PRE_ORDER);
+        Iterator inOrder = bst.traverse(TreeTraversalOrder.IN_ORDER);
         StringBuilder sb = new StringBuilder(count).append("[");
         while (count > 1) {
-            sb.append(preOrder.next() + " --> ");
+            sb.append(inOrder.next() + " --> ");
             count--;
         }
-        sb.append(preOrder.next() + "]");
+        sb.append(inOrder.next() + "]");
         System.out.println(sb);
     }
 }
