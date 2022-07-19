@@ -51,6 +51,63 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return node;
     }
 
+    // Remove a value if it exists, O(n)
+    public boolean remove(T elem) {
+        if (contains(elem)) {
+            root = remove(root, elem);
+            nodeCount--;
+            return true;
+        }
+        return false;
+    }
+
+    private Node remove(Node node, T elem) {
+        if (node == null) return null;
+
+        int cmp = elem.compareTo(node.data);
+        if (cmp < 0) {
+            node.left = remove(node.left, elem);
+        } else if (cmp > 0) {
+            node.right = remove(node.right, elem);
+        // Found the node we wish to remove
+        } else {
+            // Only a right subtree. Swap the node we wish to remove with its right child
+            if (node.left == null) {
+                return node.right;
+            } else if (node.right == null) {
+                return node.left;
+            } else {
+                // Find the leftmost node in the right subtree
+                Node tmp = findMin(node.right);
+                // Swap the data
+                node.data = tmp.data;
+                // Go into the right subtree and remove the leftmost node we found and swapped data with.
+                node.right = remove(node.right, tmp.data);
+
+                /*
+                 Find the largest node in the left subtree
+                 Node tmp = findMax(node.left);
+                 node.data = tmp.data;
+                 node.left = remove(node.left, tmp.data);
+                */
+            }
+        }
+
+        return node;
+    }
+
+    // Find the leftmost (the smallest value)
+    private Node findMin(Node node) {
+        while (node.left != null) node = node.left;
+        return node;
+    }
+
+    // Find the rightmost (the largest value)
+    private Node findMax(Node node) {
+        while (node.right != null) node = node.right;
+        return node;
+    }
+
     // Returns true is the element exists in the tree
     public boolean contains(T elem) {
         return contains(root, elem);
